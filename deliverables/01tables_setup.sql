@@ -13,6 +13,7 @@ title VARCHAR(1000),
 url VARCHAR(1000),
 publish_date VARCHAR(30),
 article_text LONGTEXT,
+content LONGTEXT,
 CONSTRAINT pk_text_id PRIMARY KEY (text_id)
 );
 DESC news_articles;
@@ -24,6 +25,7 @@ source_name VARCHAR(1000),
 author VARCHAR(1000),
 title VARCHAR(1000),
 url VARCHAR(1000),
-publish_date VARCHAR(30)
+publish_date VARCHAR(30),
+content LONGTEXT
 );
 DESC nar_temp;
