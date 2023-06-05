@@ -427,3 +427,408 @@ Records scanned: 0
 >>>>>>>>>>>>>><<<<<<<<<<<<<<
 
 
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-03 14:23:31,610 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-03 14:23:31,611 - INFO - Time taken: 0.003 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-03 14:23:31,612 - ERROR - Error executing query:
+
+    INSERT INTO nar_temp
+    (
+    source_name,
+    author,
+    title,
+    url,
+    publish_date,
+    content
+    )
+    VALUES (%s, %s, %s, %s, %s, %s)
+    
+
+(1054, "Unknown column 'content' in 'field list'")
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-03 14:23:31,613 - INFO - Time taken: 0.001 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-03 14:23:31,613 - ERROR - Error executing query:
+
+    INSERT INTO news_articles
+    (
+    source_name,
+    author,
+    title,
+    url,
+    publish_date,
+    content
+    )
+    SELECT
+        tp.source_name,
+        tp.author,
+        tp.title,
+        tp.url,
+        tp.publish_date,
+        tp.content
+    FROM nar_temp AS tp
+    LEFT JOIN news_articles AS mn
+        ON tp.title = mn.title
+            AND CAST(LEFT(tp.publish_date, 10) AS DATE) = CAST(LEFT(mn.publish_date, 10) AS DATE)
+            AND tp.author = mn.author
+    
+
+(1054, "Unknown column 'content' in 'field list'")
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-03 14:23:31,613 - INFO - Time taken: 0.000 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-03 14:23:31,613 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-03 14:23:31,613 - INFO - Time taken: 0.000 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 13:57:57,935 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 13:57:57,936 - INFO - Time taken: 0.004 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 13:58:23,118 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 13:58:23,120 - INFO - Time taken: 0.004 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 13:59:30,224 - INFO - Time taken: 0.000 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:00:24,825 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:00:24,826 - INFO - Time taken: 0.005 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:00:28,600 - ERROR - Error executing query:
+
+    INSERT INTO nar_temp
+    (
+        source_name,
+        author,
+        title,
+        url,
+        publish_date,
+        content
+    )
+    VALUES (%s, %s, %s, %s, %s, %s)
+    
+
+(1054, "Unknown column 'content' in 'field list'")
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:00:28,600 - INFO - Time taken: 0.004 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:00:52,785 - ERROR - Error executing query:
+
+    INSERT INTO news_articles
+    (
+    source_name,
+    author,
+    title,
+    url,
+    publish_date,
+    content
+    )
+    SELECT
+        tp.source_name,
+        tp.author,
+        tp.title,
+        tp.url,
+        tp.publish_date,
+        tp.content
+    FROM nar_temp AS tp
+    LEFT JOIN news_articles AS mn
+        ON tp.title = mn.title
+            AND CAST(LEFT(tp.publish_date, 10) AS DATE) = CAST(LEFT(mn.publish_date, 10) AS DATE)
+            AND tp.author = mn.author
+    
+
+(1054, "Unknown column 'content' in 'field list'")
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:00:52,785 - INFO - Time taken: 0.003 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:01:00,510 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:01:00,510 - INFO - Time taken: 0.003 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:04:55,620 - INFO - Time taken: 0.002 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:06:35,429 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:06:35,430 - INFO - Time taken: 0.002 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:07:32,527 - INFO - Error executing query:
+
+    INSERT INTO nar_temp
+    (
+        source_name,
+        author,
+        title,
+        url,
+        publish_date,
+        content
+    )
+    VALUES (%s, %s, %s, %s, %s, %s)
+    
+
+(1054, "Unknown column 'content' in 'field list'")
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:07:32,528 - INFO - Time taken: 0.002 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:09:58,527 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:09:58,527 - INFO - Time taken: 0.002 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:10:03,428 - INFO - Error executing query:
+
+    INSERT INTO news_articles
+    (
+        source_name,
+        author,
+        title,
+        url,
+        publish_date,
+        content
+    )
+    SELECT
+        tp.source_name,
+        tp.author,
+        tp.title,
+        tp.url,
+        tp.publish_date,
+        tp.content
+    FROM nar_temp AS tp
+    LEFT JOIN news_articles AS mn
+        ON tp.title = mn.title
+            AND CAST(LEFT(tp.publish_date, 10) AS DATE) = CAST(LEFT(mn.publish_date, 10) AS DATE)
+            AND tp.author = mn.author
+    
+
+(1054, "Unknown column 'content' in 'field list'")
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 14:10:03,429 - INFO - Time taken: 0.005 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:00:59,842 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:00:59,843 - INFO - Time taken: 0.003 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:01:01,505 - INFO - Successfully executed query:
+
+    INSERT INTO nar_temp
+    (
+        source_name,
+        author,
+        title,
+        url,
+        publish_date,
+        content
+    )
+    VALUES (%s, %s, %s, %s, %s, %s)
+    
+
+Records scanned: 22
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:01:01,506 - INFO - Time taken: 0.008 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:01:04,970 - INFO - Successfully executed query:
+
+    INSERT INTO news_articles
+    (
+        source_name,
+        author,
+        title,
+        url,
+        publish_date,
+        content
+    )
+    SELECT
+        tp.source_name,
+        tp.author,
+        tp.title,
+        tp.url,
+        tp.publish_date,
+        tp.content
+    FROM nar_temp AS tp
+    LEFT JOIN news_articles AS mn
+        ON tp.title = mn.title
+            AND CAST(LEFT(tp.publish_date, 10) AS DATE) = CAST(LEFT(mn.publish_date, 10) AS DATE)
+            AND tp.author = mn.author
+    
+
+Records scanned: 22
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:01:04,971 - INFO - Time taken: 0.008 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:01:07,004 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 22
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:01:07,005 - INFO - Time taken: 0.005 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:03:41,418 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:03:41,418 - INFO - Time taken: 0.002 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:03:43,663 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:03:43,664 - INFO - Time taken: 0.002 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:03:45,147 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:03:45,147 - INFO - Time taken: 0.003 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:03:45,854 - INFO - Successfully executed query:
+
+    INSERT INTO nar_temp
+    (
+        source_name,
+        author,
+        title,
+        url,
+        publish_date,
+        content
+    )
+    VALUES (%s, %s, %s, %s, %s, %s)
+    
+
+Records scanned: 22
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:03:45,854 - INFO - Time taken: 0.008 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:03:51,437 - INFO - Successfully executed query:
+
+    INSERT INTO news_articles
+    (
+        source_name,
+        author,
+        title,
+        url,
+        publish_date,
+        content
+    )
+    SELECT
+        tp.source_name,
+        tp.author,
+        tp.title,
+        tp.url,
+        tp.publish_date,
+        tp.content
+    FROM nar_temp AS tp
+    LEFT JOIN news_articles AS mn
+        ON tp.title = mn.title
+            AND CAST(LEFT(tp.publish_date, 10) AS DATE) = CAST(LEFT(mn.publish_date, 10) AS DATE)
+            AND tp.author = mn.author
+    
+
+Records scanned: 22
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-04 16:03:51,437 - INFO - Time taken: 0.004 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
