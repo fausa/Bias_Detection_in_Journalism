@@ -1124,3 +1124,149 @@ Records scanned: 905
 >>>>>>>>>>>>>><<<<<<<<<<<<<<
 
 
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:19:06,500 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:19:06,501 - INFO - Time taken: 0.012 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:19:06,552 - INFO - Successfully executed query:
+
+    INSERT INTO nar_temp
+    (
+    source_name,
+    author,
+    title,
+    url,
+    publish_date,
+    content
+    )
+    VALUES (%s, %s, %s, %s, %s, %s)
+    
+
+Records scanned: 204
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:19:06,553 - INFO - Time taken: 0.052 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:19:06,629 - INFO - Successfully executed query:
+
+    INSERT INTO news_articles
+    (
+    source_name,
+    author,
+    title,
+    url,
+    publish_date,
+    content
+    )
+    SELECT
+        tp.source_name,
+        tp.author,
+        tp.title,
+        tp.url,
+        tp.publish_date,
+        tp.content
+    FROM nar_temp AS tp
+    LEFT JOIN news_articles AS mn
+        ON tp.title = mn.title
+            AND CAST(LEFT(tp.publish_date, 10) AS DATE) = CAST(LEFT(mn.publish_date, 10) AS DATE)
+            AND tp.author = mn.author
+    
+
+Records scanned: 204
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:19:06,629 - INFO - Time taken: 0.076 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:19:06,633 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 204
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:19:06,633 - INFO - Time taken: 0.004 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:42:48,824 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 0
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:42:48,824 - INFO - Time taken: 0.002 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:42:48,847 - INFO - Successfully executed query:
+
+    INSERT INTO nar_temp
+    (
+    source_name,
+    author,
+    title,
+    url,
+    publish_date,
+    content
+    )
+    VALUES (%s, %s, %s, %s, %s, %s)
+    
+
+Records scanned: 257
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:42:48,847 - INFO - Time taken: 0.022 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:42:48,872 - INFO - Successfully executed query:
+
+    INSERT INTO news_articles
+    (
+    source_name,
+    author,
+    title,
+    url,
+    publish_date,
+    content
+    )
+    SELECT
+        tp.source_name,
+        tp.author,
+        tp.title,
+        tp.url,
+        tp.publish_date,
+        tp.content
+    FROM nar_temp AS tp
+    LEFT JOIN news_articles AS mn
+        ON tp.title = mn.title
+            AND CAST(LEFT(tp.publish_date, 10) AS DATE) = CAST(LEFT(mn.publish_date, 10) AS DATE)
+            AND tp.author = mn.author
+    
+
+Records scanned: 257
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:42:48,872 - INFO - Time taken: 0.025 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:42:48,876 - INFO - Successfully executed query:
+DELETE FROM nar_temp
+
+Records scanned: 257
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+2023-06-08 10:42:48,876 - INFO - Time taken: 0.004 seconds
+>>>>>>>>>>>>>><<<<<<<<<<<<<<
+
+
