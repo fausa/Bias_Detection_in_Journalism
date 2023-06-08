@@ -1,0 +1,6 @@
+# Large files
+data_restricted/*
+*.zip
+
+# Jupyter Notebook
+
