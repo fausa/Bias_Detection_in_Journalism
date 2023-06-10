@@ -28,6 +28,7 @@ GROUP BY source_name;
 SELECT source_name, title, article_text
 FROM news_articles
 WHERE article_text IS NULL
+	AND (source_name="CNN" OR source_name="Fox News" OR source_name="Breitbart News")
 LIMIT 10000;
 
 DESC news_articles;
