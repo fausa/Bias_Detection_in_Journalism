@@ -81,8 +81,13 @@ class ModelProcess:
         #   which may already be encoded and simply be specifying a need to
         #   impute using the 'categorical' imputation approach here)
         self.enc_cols = self.X['train'].select_dtypes(include=['object', 'category']).columns
-        self.enc_transformer = make_pipeline(OneHotEncoder(handle_unknown='ignore',
-                                                           sparse=False)) 
+
+        self.enc_transformer = make_pipeline(
+            SimpleImputer(strategy='most_frequent', fill_value='missing'),
+            OneHotEncoder(handle_unknown='ignore', sparse_output=False)
+        ) 
+#        self.enc_transformer = make_pipeline(OneHotEncoder(handle_unknown='ignore',
+#                                                           sparse=False)) 
 
         # Create categorical transformer (for pipeline-based imputation)
         self.cat_transformer = make_pipeline(SimpleImputer(strategy='most_frequent',
@@ -95,10 +100,9 @@ class ModelProcess:
 
         # Create preprocessor using transformers created above
         self.transformers = []
-# This code not needed for project; commenting-out for refinement
-#        if self.cat_cols is not None:
-#            self.transformers.append(('cat', self.cat_transformer,
-#                                      self.X['train'][self.cat_cols].columns))
+        if self.cat_cols is not None:
+            self.transformers.append(('cat', self.cat_transformer,
+                                      self.X['train'][self.cat_cols].columns))
         if self.enc_cols is not None:
             self.transformers.append(('enc', self.enc_transformer,
                                       self.X['train'][self.enc_cols].columns))

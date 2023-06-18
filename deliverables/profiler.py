@@ -6,6 +6,9 @@ import numpy as np
 from sklearn.feature_selection import VarianceThreshold
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
+# Import utility libraries
+from tqdm import tqdm; tqdm.pandas()
+
 """
 This function is effectively a customized/extended describe(),
 attempting to summarize key (numeric and categorical) characteristics
@@ -24,32 +27,52 @@ def profile(df):
     pf = pd.DataFrame(df.columns, columns=[None]).set_index(None)
 
     pf['Dtype'] = pd.DataFrame(df.dtypes)
-    pf['count'] = df.count()
-    pf['unique'] = df.nunique(axis=0)
-    pf['na'] = df.isna().sum()
-    pf['na%'] = pf['na'] / len(df) * 100
+
+    for column in df.columns:
+        if df[column].apply(lambda x: isinstance(x, list)).all():
+            pf.loc[column, 'count'] = df[column].apply(lambda x: len(x) if isinstance(x, list) else 0).sum()
+            pf.loc[column, 'unique'] = len(set(df[column].sum())) if df[column].progress_apply(lambda x: isinstance(x, list)).any() else df[column].nunique()
+            pf.loc[column, 'na'] = df[column].apply(lambda x: x is None or x == []).sum()
+            pf.loc[column, 'na%'] = pf.loc[column, 'na'] / len(df) * 100
+        else:
+            pf.loc[column, 'count'] = df[column].count()
+            pf.loc[column, 'unique'] = df[column].nunique()
+            pf.loc[column, 'na'] = df[column].isna().sum()
+            pf.loc[column, 'na%'] = pf.loc[column, 'na'] / len(df) * 100
+#    pf['count'] = df.count()
+#    pf['unique'] = df.nunique(axis=0)
+#    pf['na'] = df.isna().sum()
+#    pf['na%'] = pf['na'] / len(df) * 100
+
     pf['mean'] = pd.DataFrame(df[num_cols].mean())
     pf['std'] = pd.DataFrame(df[num_cols].std())
     pf['min'] = pd.DataFrame(df[num_cols].min())
     pf['max'] = pd.DataFrame(df[num_cols].max())
 
-    pf['skew(>='+str(SKEW_TH)+')'] = pd.DataFrame(df[num_cols].skew()).apply(lambda x: abs(x*(x>=SKEW_TH)))
-
+    skew_th_colname = 'skew(>=' + str(SKEW_TH) + ')'
     lnvar_th_colname = '<v' + str(LNVAR_TH)
-    nz_check = VarianceThreshold(LNVAR_TH).fit(df[num_cols])
-    pf[lnvar_th_colname] = pd.concat([pd.DataFrame(df[num_cols].columns,
-                                                   columns=[None]),
-                                      pd.DataFrame(~nz_check.get_support(),
-                                                   columns=[lnvar_th_colname])],
-                                     axis=1).set_index(None)
-
     vif_th_colname = 'VIF(>=' + str(VIF_TH) + ')'
-    with np.errstate(divide='ignore'):  # filter innocuous div by zero 'warning' VIF 
-        pf[vif_th_colname] = pd.DataFrame(
-            [[num_cols[i], variance_inflation_factor(np.nan_to_num(df[num_cols].values), i)]
-            for i in range(len(df[num_cols].columns))],
-            columns=[None, vif_th_colname]).set_index(None)
-    pf[vif_th_colname] = pf[vif_th_colname].apply(lambda x: abs(x*(x>=VIF_TH)))
+
+    if len(num_cols) > 0:
+        pf[skew_th_colname] = pd.DataFrame(df[num_cols].skew()).progress_apply(lambda x: abs(x*(x>=SKEW_TH)))
+
+        nz_check = VarianceThreshold(LNVAR_TH).fit(df[num_cols])
+        pf[lnvar_th_colname] = pd.concat([pd.DataFrame(df[num_cols].columns,
+                                                       columns=[None]),
+                                          pd.DataFrame(~nz_check.get_support(),
+                                                       columns=[lnvar_th_colname])],
+                                         axis=1).set_index(None)
+
+        with np.errstate(divide='ignore'):  # filter innocuous div by zero 'warning' VIF 
+            pf[vif_th_colname] = pd.DataFrame(
+                [[num_cols[i], variance_inflation_factor(np.nan_to_num(df[num_cols].values), i)]
+                for i in range(len(df[num_cols].columns))],
+                columns=[None, vif_th_colname]).set_index(None)
+        pf[vif_th_colname] = pf[vif_th_colname].progress_apply(lambda x: abs(x*(x>=VIF_TH)))
+    else:
+        pf[skew_th_colname] = ''
+        pf[lnvar_th_colname] = ''
+        pf[vif_th_colname] = ''
 
     pf = round(pf, 1).astype(str)
     pf.replace(['0', '0.0', 'nan', 'False'], '', inplace=True)
