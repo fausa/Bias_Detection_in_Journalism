@@ -44,7 +44,7 @@ class ModelProcess:
                  X_train=None, y_train=None,
                  X_val=None, y_val=None,
                  X_test=None, y_test=None,
-                 classes=None,
+                 labels=None,
                  cat_cols=None, num_cols=None,
                  balance_target=False):
         self.algorithm = algorithm
@@ -53,11 +53,12 @@ class ModelProcess:
         self.X = {'train': X_train, 'val': X_val, 'test': X_test}
         self.y = {'train': y_train, 'val': y_val, 'test': y_test}
 
-        self.classes = classes if classes is not None else sorted(y_train.iloc[:, 0].unique())
-        if len(self.classes) > 2:
+        self.labels = labels if labels is not None else sorted(y_train.iloc[:, 0].unique())
+        if len(self.labels) > 2:
             self.f1_average = 'macro'
         else:
             self.f1_average = 'binary'
+        self.pos_label = labels[0] if labels[0] is not None else 1
 
         self.cat_cols = cat_cols
         self.num_cols = num_cols
@@ -81,8 +82,13 @@ class ModelProcess:
         #   which may already be encoded and simply be specifying a need to
         #   impute using the 'categorical' imputation approach here)
         self.enc_cols = self.X['train'].select_dtypes(include=['object', 'category']).columns
-        self.enc_transformer = make_pipeline(OneHotEncoder(handle_unknown='ignore',
-                                                           sparse=False)) 
+
+        self.enc_transformer = make_pipeline(
+            SimpleImputer(strategy='most_frequent', fill_value='missing'),
+            OneHotEncoder(handle_unknown='ignore', sparse_output=False)
+        ) 
+#        self.enc_transformer = make_pipeline(OneHotEncoder(handle_unknown='ignore',
+#                                                           sparse=False)) 
 
         # Create categorical transformer (for pipeline-based imputation)
         self.cat_transformer = make_pipeline(SimpleImputer(strategy='most_frequent',
@@ -95,10 +101,9 @@ class ModelProcess:
 
         # Create preprocessor using transformers created above
         self.transformers = []
-# This code not needed for project; commenting-out for refinement
-#        if self.cat_cols is not None:
-#            self.transformers.append(('cat', self.cat_transformer,
-#                                      self.X['train'][self.cat_cols].columns))
+        if self.cat_cols is not None:
+            self.transformers.append(('cat', self.cat_transformer,
+                                      self.X['train'][self.cat_cols].columns))
         if self.enc_cols is not None:
             self.transformers.append(('enc', self.enc_transformer,
                                       self.X['train'][self.enc_cols].columns))
@@ -150,7 +155,7 @@ class ModelProcess:
             # Temporarily, avoid 'crash' if e.g., y_true doesn't exist (may be case for 'test', for example)
             try:
                 self.score[dataset] = [accuracy_score(self.y[dataset], self.pred[dataset]), 
-                                    f1_score(self.y[dataset], self.pred[dataset], average=self.f1_average)]
+                                       f1_score(self.y[dataset], self.pred[dataset], average=self.f1_average, pos_label=self.pos_label)]
             except:
                 pass
 
@@ -217,11 +222,11 @@ class ModelProcess:
 #                print(regressionSummary(self.y[dataset], self.pred[dataset]))
 #            except:
 #                pass
-            
-    def confusion_matrix(self, dataset='train'):
+
+    def confusion_matrix(self, dataset='train', labels=None):
         fig, ax = plt.subplots()
         try:
-            cmd = ConfusionMatrixDisplay(confusion_matrix(self.y[dataset], self.pred[dataset]))
+            cmd = ConfusionMatrixDisplay(confusion_matrix(self.y[dataset], self.pred[dataset]), display_labels=self.labels)
         except:
             pass
         cmd.plot(ax = ax)

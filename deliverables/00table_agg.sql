@@ -2,6 +2,8 @@ USE 509_final_proj;
 
 SELECT * FROM nar_temp;
 SELECT * FROM news_articles;
+SELECT * FROM news_articles
+WHERE source_name NOT IN ("CNN", "The Washington Post", "Fox News", "Breitbart News");
 
 SELECT
 source_name,
