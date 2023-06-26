@@ -43,11 +43,11 @@ Queries for topics of political interest are used to gather articles from explic
 
 ## Data Sources:
 
-[Master Persisted Train/Test Dataset](https://github.com/fausa/Bias_Detection_in_Journalism/data/master.csv)
+[Master Persisted Train/Test Dataset](data/master.csv)
 
-[Associated Press Dataset](https://github.com/fausa/Bias_Detection_in_Journalism/data/master_tokenized_AP.csv)
+[Associated Press Dataset](data/master_tokenized_AP.csv)
 
-[The_Hill_Dataset](https://github.com/fausa/Bias_Detection_in_Journalism/data/master_business_The_Hill.csv)
+[The_Hill_Dataset](data/master_business_The_Hill.csv)
 
 
 
