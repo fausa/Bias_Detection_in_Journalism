@@ -8,7 +8,7 @@
 
 **Company Size: 3 (startup)**
 
-**[GitHub Repository](https://github.com/fausa/ADS509_Final_project)**
+**[GitHub Repository](https://github.com/fausa/Bias_Detection_in_Journalism)**
 
 
 
@@ -43,11 +43,11 @@ Queries for topics of political interest are used to gather articles from explic
 
 ## Data Sources:
 
-[Master Persisted Train/Test Dataset](https://github.com/fausa/ADS509_Final_project/data/master.csv)
+[Master Persisted Train/Test Dataset](https://github.com/fausa/Bias_Detection_in_Journalism/data/master.csv)
 
-[Associated Press Dataset](https://github.com/fausa/ADS509_Final_project/data/master_tokenized_AP.csv)
+[Associated Press Dataset](https://github.com/fausa/Bias_Detection_in_Journalism/data/master_tokenized_AP.csv)
 
-[The_Hill_Dataset](https://github.com/fausa/ADS509_Final_project/data/master_business_The_Hill.csv)
+[The_Hill_Dataset](https://github.com/fausa/Bias_Detection_in_Journalism/data/master_business_The_Hill.csv)
 
 
 
