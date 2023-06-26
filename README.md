@@ -43,14 +43,11 @@ Queries for topics of political interest are used to gather articles from explic
 
 ## Data Sources:
 
-[Master Persisted Train/Test Dataset](https://github.com/fausa/ADS509_Final_project/data/)
+[Master Persisted Train/Test Dataset](https://github.com/fausa/ADS509_Final_project/data/master.csv)
 
-[Associated Press Dataset](https://github.com/fausa/ADS509_Final_project/data/)
+[Associated Press Dataset](https://github.com/fausa/ADS509_Final_project/data/master_tokenized_AP.csv)
 
-[The_Hill_Dataset](https://github.com/fausa/ADS509_Final_project/data)
+[The_Hill_Dataset](https://github.com/fausa/ADS509_Final_project/data/master_business_The_Hill.csv)
 
 
 
-The source data is stored in a public S3 bucket and will get there by way of SQL extraction of the necessary tables, and loading the comma-delimited files for weather:
-
-s3://sagemaker-us-east-1-993410942383/content-project/airline_data/
