@@ -47,7 +47,7 @@ Queries for topics of political interest are used to gather articles from explic
 
 [Associated Press Dataset](data/master_tokenized_AP.csv)
 
-[The_Hill_Dataset](data/master_business_The_Hill.csv)
+[The_Hill_Dataset](data/master_business_TheHill.csv)
 
 
 
